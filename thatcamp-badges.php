@@ -45,6 +45,8 @@ class Thatcamp_Badges_Loader {
 		// Attach textdomain for localization
 		add_action( 'thatcamp_badges_init', array ( $this, 'textdomain' ) );
 		
+		add_action( 'thatcamp_badges_init', array ( $this, 'create_badges_pdf' ) );
+		
 	}
 
 	// Let plugins know that we're initializing
@@ -72,7 +74,7 @@ class Thatcamp_Badges_Loader {
 
 	function includes() {
 		if ( is_admin() ) {
-			require( dirname( __FILE__ ) . '/includes/class-admin-main.php' );
+			require( dirname( __FILE__ ) . '/includes/class-admin-main.php' );			
         }
 		require_once( dirname( __FILE__ ) . '/includes/functions.php' );
 	}
@@ -81,7 +83,31 @@ class Thatcamp_Badges_Loader {
 	function loaded() {
 		do_action( 'thatcamp_badges_loaded' );
 	}
-    
+	
+	function create_badges_pdf() {
+		if ( array_key_exists('create_badges_pdf', $_POST) ) {
+		    
+		    require( WP_PLUGIN_DIR . '/thatcamp-badges/includes/class-badges-renderer.php' );
+		    
+		    $userIds = isset($_POST['users']) ? $_POST['users'] : array();
+            $options = isset($_POST['options']) ? $_POST['options'] : array();
+            	    
+            if ($userIds) {
+                foreach ($userIds as $userId) {
+                    $user = get_userdata($userId);
+                    $users[] = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->user_email, 'user_url' => $user->user_url);
+                }
+                
+                $badges = new Thatcamp_Badges_Renderer($users, $options);
+                $badges->render();
+            }
+            
+		    load_template( WP_PLUGIN_DIR . '/thatcamp-badges/includes/class-admin-main.php?' );
+            
+
+		}
+		return false;
+	}
 }
 
 endif;

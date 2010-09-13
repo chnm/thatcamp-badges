@@ -20,60 +20,60 @@ class Thatcamp_Badges_Admin_Main {
     }
 
     function display() {
-        $blogUsers = get_users_of_blog(); //gets registered users
-    
-        // // print_r($users);
-        //     
-        // if(isset($_POST['create'])) {  
-        // 
-        //     $options = array(
-        //             'background_image' => '/websites/thatcamp.org/wp-content/plugins/thatcamp-badges/images/thatcamp-badge-bg.jpg'
-        //         );
-        // 
-        //     $users = array();
-        //     if ($blogUsers) {
-        //         foreach ($blogUsers as $blogUser) {
-        //             $user = get_userdata($blogUser->ID);
-        //             $users[] = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->user_email, 'user_url' => $user->user_url, 'twitter_username' => $user->twitter_username);
-        //         }
-        //     }
-        //     
-        //     // print_r($users);       
-        //     $badges = new Thatcamp_Badges_Renderer($users, $options);
-        //     $badges->render();
+        $users = get_users_of_blog();
     ?>
         <div class="wrap">
-        <?php screen_icon(); ?>
         <h2>Conference Badges</h2>
-    
-        <p><a href="/wp-content/plugins/thatcamp-badges/badges.pdf">Download PDF</a></p>
-    
-        <form action="" method="post">
 
-            <p><input type="submit" name="create" value="Create"></p>
+            <form action="" method="post">
+            
+            <label for="options[template]">Template</label>
+            <select name="options[template]">
+                <option value="avery74549.php">Avery 74549</option>
+                <option value="avery74541.php">Avery 74541</option>
+            </select>
+            
+            <?php if ( $users ) : ?>
+
+            <table class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr class="thead">
+            <?php print_column_headers('users') ?>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr class="thead">
+            <?php print_column_headers('users', false) ?>
+            </tr>
+            </tfoot>
+
+            <tbody id="users" class="list:user user-list">
+            <?php
+            $style = '';
+            foreach ( $users as $user ) {
+                $userid = $user->ID;
+            	$user_object = new WP_User($userid);
+            	$roles = $user_object->roles;
+            	$role = array_shift($roles);
+
+            	if ( is_multisite() && empty( $role ) )
+            		continue;
+
+            	$style = ( ' class="alternate"' == $style ) ? '' : ' class="alternate"';
+            	echo "\n\t", user_row( $user_object, $style, $role );
+            }
+            ?>
+            </tbody>
+            </table>
+
+            <?php endif; ?>
+
+            <p><input type="submit" name="create_badges_pdf" value="Create Badge PDF"></p>
             
         
         </form>
     
-        <?php 
-    
-        // $blogUsers = get_users_of_blog();
-        // 
-        // foreach ($blogUsers as $blogUser) {
-        //     $user = get_userdata($blogUser->ID);
-        //     
-        //     $gravatar = 'http://www.gravatar.com/avatar/'. md5($user->user_email).'?d=404';
-        //             
-        //     if (validate_gravatar($user->user_email)) {
-        //         echo 'has a gravatar at <img src="'.$gravatar.'" />';
-        //         
-        //     } else {
-        //         echo ' does not have a gravatar';
-        //         
-        //     }
-        //     echo '<br />';
-        // }
-        ?>
         </div>
     <?php
     }
