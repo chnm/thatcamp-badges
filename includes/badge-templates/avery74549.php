@@ -1,6 +1,6 @@
 <?php
 // Add a page, but only on a multiple of 8
-if ( $counter == 1 || ( $counter % 9 == 1 ) ) {
+if ( $counter == 1 || ( $counter % 8 == 1 ) ) {
 	$pdf->AddPage('P', 'Letter');
 	$counter = 1;
 }
