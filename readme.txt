@@ -26,7 +26,7 @@ If you're upgrading manually from a previous version of Anthologize, please be s
 
 == Documentation ==
 
-Documentation can be found at
+Documentation can be found at [THATCamp Plugins](http://thatcamp.org/plugins "THATCamp Plugins").
 
 == Changelog ==
 
