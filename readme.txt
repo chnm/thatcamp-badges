@@ -1,6 +1,5 @@
 === THATCamp Badges ===
-
-Contributors: jeremyboggs
+Contributors: chnm, jeremyboggs
 Donate link: http://chnm.gmu.edu/
 Tags: conferences, badges, name tag, events
 Requires at least: 3.0
