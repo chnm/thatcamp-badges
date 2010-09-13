@@ -1,6 +1,6 @@
 === THATCamp Badges ===
-Contributors: chnm, jeremyboggs
-Donate link: http://chnm.gmu.edu/
+Contributors: jeremyboggs
+Donate link: http://chnm.gmu.edu
 Tags: conferences, badges, name tag, events
 Requires at least: 3.0
 Tested up to: 3.0.1
@@ -19,10 +19,8 @@ The best way to install THATCamp Badges is via the Add New link under Dashboard 
 To install THATCamp Badges manually, follow these steps.
 
 1. Upload the `thatcamp-badges` directory to `/wp-content/plugins/`
-1. Activate THATCamp Badges through the WordPres 'Plugins' menu
-1. Visit Dashboard > Name Badges to start generate name badges from your list of site users.
-
-If you're upgrading manually from a previous version of Anthologize, please be sure to deactivate your existing plugin before replacing it with the new files, and reactivate after uploading.
+2. Activate THATCamp Badges through the WordPres 'Plugins' menu
+3. Visit Dashboard > Name Badges to start generate name badges from your list of site users.
 
 == Documentation ==
 
