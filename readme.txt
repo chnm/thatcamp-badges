@@ -20,7 +20,7 @@ To install THATCamp Badges manually, follow these steps.
 
 1. Upload the `thatcamp-badges` directory to `/wp-content/plugins/`
 2. Activate THATCamp Badges through the WordPres 'Plugins' menu
-3. Visit Dashboard > Name Badges to start generate name badges from your list of site users.
+3. Visit Dashboard > TC Badges to start generate name badges from your list of site users.
 
 == Documentation ==
 
@@ -36,3 +36,5 @@ Documentation can be found at [THATCamp Plugins](http://thatcamp.org/plugins "TH
 Funding to create these plugins was generously provided by the Mellon Foundation as part of the 2010-2012 grant project "Digital Methods Training at Scale: Leveraging THATCamp Through a Regional System."
 
 Thanks to Andy Peatling for his badge-gen code at http://apeatling.wordpress.com/2008/08/08/creating-gravatar-enabled-conference-badges-a-how-to/
+
+Much of the structure and organization of this plugin is borrowed liberally from the Anthologize plugin at http://anthologize.org.
