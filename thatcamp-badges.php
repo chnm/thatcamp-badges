@@ -59,7 +59,7 @@ class Thatcamp_Badges_Loader {
 	function textdomain() {
 		$locale = get_locale();
 
-		// First look in wp-content/anthologize-files/languages, where custom language files will not be overwritten by Anthologize upgrades. Then check the packaged language file directory.
+		// First look in wp-content/thatcamp-badges-files/languages, where custom language files will not be overwritten by Anthologize upgrades. Then check the packaged language file directory.
 		$mofile_custom = WP_CONTENT_DIR . "/thatcamp-badges-files/languages/thatcamp-badges-$locale.mo";
 		$mofile_packaged = WP_PLUGIN_DIR . "/thatcamp-badges/languages/thatcamp-badges-$locale.mo";
 
