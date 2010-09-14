@@ -15,7 +15,7 @@ class Thatcamp_Badges_Admin_Main {
 	
     function admin_menu() {
     	if (function_exists('add_menu_page')) {
-    		add_menu_page('Badges', 'Badges', 8, basename(__FILE__), array( $this, 'display'));
+    		add_menu_page('THATCamp Badges', 'TC Badges', 'manage-options', dirname(__FILE__) . '/class-admin-main.php', array( $this, 'display'));
     	}
     }
 

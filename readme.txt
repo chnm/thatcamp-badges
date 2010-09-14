@@ -30,3 +30,9 @@ Documentation can be found at [THATCamp Plugins](http://thatcamp.org/plugins "TH
 
 = 1.0-alpha =
 * Initial public release
+
+== Credits ==
+
+Funding to create these plugins was generously provided by the Mellon Foundation as part of the 2010-2012 grant project "Digital Methods Training at Scale: Leveraging THATCamp Through a Regional System."
+
+Thanks to Andy Peatling for his badge-gen code at http://apeatling.wordpress.com/2008/08/08/creating-gravatar-enabled-conference-badges-a-how-to/
