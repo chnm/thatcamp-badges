@@ -15,7 +15,7 @@ class Thatcamp_Badges_Admin_Main {
     
     function admin_menu() {
         if (function_exists('add_menu_page')) {
-            add_menu_page('THATCamp Badges', 'TC Badges', 'manage-options', dirname(__FILE__) . '/class-admin-main.php', array( $this, 'display'));
+            add_menu_page(__('THATCamp Badges'), __('TC Badges'), 'manage-options', dirname(__FILE__) . '/class-admin-main.php', array( $this, 'display'));
         }
     }
 
@@ -23,11 +23,11 @@ class Thatcamp_Badges_Admin_Main {
         $users = get_users_of_blog();
     ?>
         <div class="wrap">
-        <h2>Conference Badges</h2>
+        <h2><?php echo _e('THATCamp Badges'); ?></h2>
 
             <form action="" method="post">
             
-            <label for="options[template]">Template</label>
+            <label for="options[template]"><?php echo _e('Template'); ?></label>
             <select name="options[template]">
                 <option value="avery74549.php">Avery 74549</option>
                 <option value="avery74541.php">Avery 74541</option>
@@ -69,7 +69,7 @@ class Thatcamp_Badges_Admin_Main {
 
             <?php endif; ?>
 
-            <p><input type="submit" name="create_badges_pdf" value="Create Badge PDF"></p>
+            <p><input type="submit" name="create_badges_pdf" value="<?php echo _e('Create Badge PDF'); ?>"></p>
             
         
         </form>
