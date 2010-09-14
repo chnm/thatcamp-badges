@@ -5,7 +5,7 @@ Plugin URI: http://www.thatcamp.org
 Description: Creates a formatted PDF for printing conferences badges based on selected users in your WordPress site.
 Author: Center for History and New Media
 Author URI: http://chnm.gmu.edu
-Version: 1.0
+Version: 1.0-alpha
 */
 
 /*
