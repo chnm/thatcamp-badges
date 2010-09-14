@@ -13,43 +13,43 @@ function thatcamp_get_file_by_curl( $file, $newfilename ) {
 }
 
 function thatcamp_get_image_extension($filename) {
-	$type_mapping =  array( '1' => 'image/gif', '2' => 'image/jpeg', '3' => 'image/png' );
-	@$size = GetImageSize( $filename );
+    $type_mapping =  array( '1' => 'image/gif', '2' => 'image/jpeg', '3' => 'image/png' );
+    @$size = GetImageSize( $filename );
 
-	if ( $size[2] && $type_mapping[$size[2]] ) {
-		if ( $type_mapping[$size[2]] == 'image/gif' )
-		        return '.gif';
+    if ( $size[2] && $type_mapping[$size[2]] ) {
+        if ( $type_mapping[$size[2]] == 'image/gif' )
+                return '.gif';
 
-		if ( $type_mapping[$size[2]] == 'image/jpeg' )
-			return '.jpg';
+        if ( $type_mapping[$size[2]] == 'image/jpeg' )
+            return '.jpg';
 
-		if ( $type_mapping[$size[2]] == 'image/png' )
-			return '.png';
-	}
-	return '.jpg';
+        if ( $type_mapping[$size[2]] == 'image/png' )
+            return '.png';
+    }
+    return '.jpg';
 }
 
 function thatcamp_png_to_jpg( $file ) {
-	if ( get_image_extension( $file ) == '.png' ) {
-		$image = imagecreatefrompng( $file );
-		imagejpeg( $image, $file . '.jpg', 80 );
-		return $file . '.jpg';
-	} else {
-		return false;
-	}
+    if ( get_image_extension( $file ) == '.png' ) {
+        $image = imagecreatefrompng( $file );
+        imagejpeg( $image, $file . '.jpg', 80 );
+        return $file . '.jpg';
+    } else {
+        return false;
+    }
 }
 
 function thatcamp_validate_gravatar($email) {
-	// Craft a potential url and test its headers
-	$hash = md5($email);
-	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
-	$headers = @get_headers($uri);
-	if (!preg_match("|200|", $headers[0])) {
-		$has_valid_avatar = FALSE;
-	} else {
-		$has_valid_avatar = TRUE;
-	}
-	return $has_valid_avatar;
+    // Craft a potential url and test its headers
+    $hash = md5($email);
+    $uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
+    $headers = @get_headers($uri);
+    if (!preg_match("|200|", $headers[0])) {
+        $has_valid_avatar = FALSE;
+    } else {
+        $has_valid_avatar = TRUE;
+    }
+    return $has_valid_avatar;
 }
 
 
