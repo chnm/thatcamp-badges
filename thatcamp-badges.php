@@ -29,11 +29,11 @@ Based on badge-gen code released by Andy Peatling at http://apeatling.wordpress.
 THATCamp Badges uses the FPDF library by Olivier Plathey, available at http://www.fpdf.org/.
 */
 
-if ( !class_exists('Thatcamp_Badges_Loader') ):
+if ( !class_exists('Thatcamp_Badges') ):
 
-class Thatcamp_Badges_Loader {
+class Thatcamp_Badges {
     
-    function thatcamp_badges_loader () {
+    function thatcamp_badges() {
 
         add_action( 'plugins_loaded', array ( $this, 'loaded' ) );
 
@@ -110,4 +110,4 @@ class Thatcamp_Badges_Loader {
 
 endif;
 
-$thatcamp_badges_loader = new Thatcamp_Badges_Loader();
+$thatcamp_badges = new Thatcamp_Badges();
