@@ -100,8 +100,8 @@ class Thatcamp_Badges {
                         <th scope="row"><label for="options[template]"><?php _e('Template'); ?></label></th>
                         <td>
                             <select name="options[template]">
-                                <option value="avery74549.php">Avery 74549</option>
                                 <option value="avery74541.php">Avery 74541</option>
+                                <option value="avery74549.php">Avery 74549</option>
                             </select>
                         </td>
                     </tr>

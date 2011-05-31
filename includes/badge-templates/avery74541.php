@@ -5,55 +5,40 @@ if ( $counter == 1 || ( $counter % 6 == 1 ) ) {
     $counter = 1;
 }
 
+$badgeHeight = 3;
+$badgeWidth = 4;
+
+$topX = 1;
+$topY = 0.25;
+
 // Set the co-ordinates for all items in each of the badges
 switch ( $counter ) {
     case 1:
-        $background_x = 6.25;
-        $background_y = 24;
-        $avatar_x = 75;
-        $avatar_y = 32;
-        $text_x = 15;
-        $text_y = 65;
+        $background_x = $topX;
+        $background_y = $topY;
     break;
     case 2:
-        $background_x = 108.5;
-        $background_y = 24;
-        $avatar_x = 177.25;
-        $avatar_y = 32;
-        $text_x = 119;
-        $text_y = 65;
+        $background_x = $topX + $badgeWidth;
+        $background_y = $topY;
     break;
     case 3:
-        $background_x = 6.25;
-        $background_y = 100;
-        $avatar_x = 75;
-        $avatar_y = 108;
-        $text_x = 17.5;
-        $text_y = 141;
+        $background_x = $topX; // mm from left
+        $background_y = $topY + $badgeHeight;
     break;
     case 4:
-        $background_x = 108.5;
-        $background_y = 100;
-        $avatar_x = 177.25;
-        $avatar_y = 108;
-        $text_x = 114;
-        $text_y = 141;
+        $background_x = $topX + $badgeWidth;
+        $background_y = $topY + $badgeHeight;
     break;
     case 5:
-        $background_x = 6.25;
-        $background_y = 176;
-        $avatar_x = 75;
-        $avatar_y = 184;
-        $text_x = 17.5;
-        $text_y = 217;          
+        $background_x = $topX;
+        $background_y = $topY + ($badgeHeight * 2);
     break;
     case 6:
-        $background_x = 108.5;
-        $background_y = 176;
-        $avatar_x = 177.25;
-        $avatar_y = 184;
-        $text_x = 114;
-        $text_y = 217;          
+        $background_x = $topX + $badgeWidth;
+        $background_y = $topY + ($badgeHeight * 2);
     break;
 }
+
+$text_x = $background_x + 0.5;
+$text_y = $background_y + 0.5;
 ?>

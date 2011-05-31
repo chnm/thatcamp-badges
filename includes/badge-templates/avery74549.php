@@ -6,7 +6,7 @@ if ( $counter == 1 || ( $counter % 8 == 1 ) ) {
 }
 
 $badgeWidth = 88;
-$badgeHeight = 57;
+$badgeHeight = 58;
 
 $topX = 19;
 $topY = 25;
