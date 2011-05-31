@@ -136,7 +136,12 @@ class Thatcamp_Badges {
             if ($users) {
                 foreach ($users as $user) {
                     $userData = get_userdata($user->ID);
-                    $userArray[] = array('first_name' => $userData->first_name, 'last_name' => $userData->last_name, 'email' => $userData->user_email, 'user_url' => $userData->user_url);
+                    $userDataArray = array('first_name' => $userData->first_name, 'last_name' => $userData->last_name, 'email' => $userData->user_email, 'user_url' => $userData->user_url);
+                    if ($userTwitter = $userData->user_twitter) {
+                        $userDataArray['user_twitter'] = $userTwitter;
+                    }
+                    $userArray[] = $userDataArray;
+                    
                 }
                 $badges = new Thatcamp_Badges_Renderer($userArray, $options);
                 $badges->render();

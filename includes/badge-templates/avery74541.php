@@ -39,6 +39,6 @@ switch ( $counter ) {
     break;
 }
 
-$text_x = $background_x + 0.5;
-$text_y = $background_y + 0.5;
+$text_x = $background_x + 0.25;
+$text_y = $background_y + 0.25;
 ?>

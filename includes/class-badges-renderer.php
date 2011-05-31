@@ -22,7 +22,7 @@ class Thatcamp_Badges_Renderer {
         // Set up the new PDF object
         $pdf = new FPDF('P', 'in', 'Letter');
 
-        $pdf->SetTextColor(0,0,0);
+        $pdf->SetTextColor(21,80,118);
 
         // Remove page margins.
         $pdf->SetMargins(0, 0);
@@ -46,23 +46,35 @@ class Thatcamp_Badges_Renderer {
                         
                 // Set the co-ordinates, font, and text for the first name
                 $pdf->SetXY($text_x, $text_y);
-                $pdf->SetFont('helvetica', 'b', 22);
-                $pdf->MultiCell(2.5, 0.5,ucwords(stripslashes($users[$i]['first_name'])),0,'L');
+                $pdf->SetFont('helvetica', 'b', 30);
+                $pdf->MultiCell(2.5, 0.5,stripslashes($users[$i]['first_name']),0,'L');
                 
                 // Set the co-ordinates, font, and text for the last name
-                $pdf->SetXY($text_x, $text_y + 0.25);
+                $pdf->SetXY($text_x, $text_y + 0.5);
                 $pdf->SetFont('helvetica','',12);
-                $pdf->MultiCell(2.5, 0.25,stripslashes(ucwords($users[$i]['last_name'])),0,'L');
+                $pdf->MultiCell(2.5, 0.25,stripslashes($users[$i]['last_name']),0,'L');
                 
-                if ( $user_url = $users[$i]['user_url'] ) {
-                
+                if ($userTwitter = $users[$i]['user_twitter']) {
                     // Remove http:// from blog URL's and also remove ending slashes
-                    $user_url = str_replace('http://', '', $user_url);
-                
-                    // Set the co-ordinates, font, and text for the blog url
-                    $pdf->SetXY($text_x, $text_y + 0.5);
+                    $userTwitter = str_replace('@', '', $userTwitter);
+                    $userTwitter = '@'.$userTwitter;
+                    
+                    $pdf->SetTextColor(150,150,150);
+                    $pdf->SetXY($text_x, $text_y + 1);
                     $pdf->SetFont('helvetica','',10);
-                    $pdf->MultiCell(2.5,0.25,$users[$i]['user_url'],0,'L');
+                    $pdf->MultiCell(2.5,0.25,$userTwitter,0,'L');
+                    $pdf->SetTextColor(21,80,118);
+                }
+                
+                if ( $userUrl = $users[$i]['user_url'] ) {
+                    // Remove http:// from blog URL's and also remove ending slashes
+                    $userUrl = str_replace('http://', '', $userUrl);
+
+                    $pdf->SetTextColor(150,150,150);
+                    $pdf->SetXY($text_x, $text_y + 1.25);
+                    $pdf->SetFont('helvetica','',10);
+                    $pdf->MultiCell(2.5,0.25,$userUrl,0,'L');
+                    $pdf->SetTextColor(21,80,118);
                 }
                 
         		$counter++;
