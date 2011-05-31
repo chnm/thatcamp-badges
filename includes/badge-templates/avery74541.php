@@ -8,8 +8,8 @@ if ( $counter == 1 || ( $counter % 6 == 1 ) ) {
 $badgeHeight = 3;
 $badgeWidth = 4;
 
-$topX = 1;
-$topY = 0.25;
+$topX = 0.25;
+$topY = 1;
 
 // Set the co-ordinates for all items in each of the badges
 switch ( $counter ) {
