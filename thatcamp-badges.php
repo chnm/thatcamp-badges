@@ -9,7 +9,7 @@ Version: 1.0-alpha
 */
 
 /*
-Copyright (C) 2010 Center for History and New Media, George Mason University
+Copyright (C) 2010-2011 Center for History and New Media, George Mason University
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -29,8 +29,6 @@ Based on badge-gen code released by Andy Peatling at http://apeatling.wordpress.
 THATCamp Badges uses the FPDF library by Olivier Plathey, available at http://www.fpdf.org/.
 */
 
-if ( !class_exists('Thatcamp_Badges') ):
-
 class Thatcamp_Badges {
     
     function thatcamp_badges() {
@@ -38,15 +36,14 @@ class Thatcamp_Badges {
         add_action( 'plugins_loaded', array ( $this, 'loaded' ) );
 
         add_action( 'init', array ( $this, 'init' ) );
+        add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
         // Include the necessary files
         add_action( 'thatcamp_badges_loaded', array ( $this, 'includes' ) );
 
         // Attach textdomain for localization
         add_action( 'thatcamp_badges_init', array ( $this, 'textdomain' ) );
-        
-        add_action( 'thatcamp_badges_init', array ( $this, 'create_badges_pdf' ) );
-        
+
     }
 
     // Let plugins know that we're initializing
@@ -74,9 +71,9 @@ class Thatcamp_Badges {
 
     function includes() {
         if ( is_admin() ) {
-            require( dirname( __FILE__ ) . '/includes/class-admin-main.php' );          
+            require_once( dirname( __FILE__ ) . '/includes/functions.php' );
+            require_once( dirname( __FILE__ ) . '/includes/class-badges-renderer.php' );
         }
-        require_once( dirname( __FILE__ ) . '/includes/functions.php' );
     }
 
     // Let plugins know that we're done loading
@@ -84,30 +81,69 @@ class Thatcamp_Badges {
         do_action( 'thatcamp_badges_loaded' );
     }
     
-    function create_badges_pdf() {
-        if ( array_key_exists('create_badges_pdf', $_POST) ) {
-            
-            require( WP_PLUGIN_DIR . '/thatcamp-badges/includes/class-badges-renderer.php' );
-            
-            $userIds = isset($_POST['users']) ? $_POST['users'] : array();
-            $options = isset($_POST['options']) ? $_POST['options'] : array();
+    function admin_menu() {
+        if (function_exists('add_users_page')) {
+            add_users_page(__('Create User Badges'), __('Create Badges'), 'manage-options', 'thatcamp-badges', array( $this, 'display'));
+        }
+    }
+
+    function display() {
+        if ($_POST) {
+            $this->create_badges_pdf($_POST);
+        }
+    ?>
+        <div class="wrap">
+            <h2><?php echo _e('Create User Badges'); ?></h2>
+            <form action="<?php get_admin_url(); ?>users.php?page=thatcamp-badges&amp;noheader=true" method="post">
+                <table class="form-table">
+                    <tr valign="top">
+                        <th scope="row"><label for="options[template]"><?php _e('Template'); ?></label></th>
+                        <td>
+                            <select name="options[template]">
+                                <option value="avery74549.php">Avery 74549</option>
+                                <option value="avery74541.php">Avery 74541</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row"><label for="options[background_image]"><?php _e('Background Image'); ?></label></th>
+                        <td>
+                            <select name="options[background_image]">
+                            <?php
+                            $images = get_posts('post_type=attachment&post_status=any&post_mime_type=image/jpeg,image/png' );
+                            foreach ($images as $image ) { ?>
+                            <option value="<?php echo wp_get_attachment_url( $image->ID ); ?>"><?php echo $image->post_title; ?></option>
+                            <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th></th>
+                        <td><input type="submit" name="create_badges_pdf" class="button-primary" value="<?php echo _e('Create Badge PDF'); ?>"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    <?php
+    }
+    
+    function create_badges_pdf($post = array()) {
+        if ($post && array_key_exists('create_badges_pdf', $post) ) {
+                        
+            $users = get_users();
+            $options = isset($post['options']) ? $post['options'] : array();
                     
-            if ($userIds) {
-                foreach ($userIds as $userId) {
-                    $user = get_userdata($userId);
-                    $users[] = array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'email' => $user->user_email, 'user_url' => $user->user_url);
+            if ($users) {
+                foreach ($users as $user) {
+                    $userData = get_userdata($user->ID);
+                    $userArray[] = array('first_name' => $userData->first_name, 'last_name' => $userData->last_name, 'email' => $userData->user_email, 'user_url' => $userData->user_url);
                 }
-                $badges = new Thatcamp_Badges_Renderer($users, $options);
+                $badges = new Thatcamp_Badges_Renderer($userArray, $options);
                 $badges->render();
-            }
-            
-            load_template( WP_PLUGIN_DIR . '/thatcamp-badges/includes/class-admin-main.php' );
-            
+            }            
         }
         return false;
     }
 }
-
-endif;
 
 $thatcamp_badges = new Thatcamp_Badges();
