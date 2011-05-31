@@ -50,7 +50,7 @@ class Thatcamp_Badges_Renderer {
                 $pdf->MultiCell(2.5, 0.5,ucwords(stripslashes($users[$i]['first_name'])),0,'L');
                 
                 // Set the co-ordinates, font, and text for the last name
-                $pdf->SetXY($text_x, $text_y + 0.75);
+                $pdf->SetXY($text_x, $text_y + 0.25);
                 $pdf->SetFont('helvetica','',12);
                 $pdf->MultiCell(2.5, 0.25,stripslashes(ucwords($users[$i]['last_name'])),0,'L');
                 
@@ -60,7 +60,7 @@ class Thatcamp_Badges_Renderer {
                     $user_url = str_replace('http://', '', $user_url);
                 
                     // Set the co-ordinates, font, and text for the blog url
-                    $pdf->SetXY($text_x, $text_y + 1.25);
+                    $pdf->SetXY($text_x, $text_y + 0.5);
                     $pdf->SetFont('helvetica','',10);
                     $pdf->MultiCell(2.5,0.25,$users[$i]['user_url'],0,'L');
                 }
