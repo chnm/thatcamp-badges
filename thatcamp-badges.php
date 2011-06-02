@@ -118,6 +118,13 @@ class Thatcamp_Badges {
                         </td>
                     </tr>
                     <tr valign="top">
+                        <th scope="row"><label for="include_users"><?php _e('Include Users'); ?></label></th>
+                        <td>
+                            <input type="text" name="include_users">
+                            <p><small>A comma-separated list of user IDs.</small></p>
+                        </td>
+                    </tr>
+                    <tr valign="top">
                         <th></th>
                         <td><input type="submit" name="create_badges_pdf" class="button-primary" value="<?php echo _e('Create Badge PDF'); ?>"></td>
                     </tr>
@@ -129,8 +136,11 @@ class Thatcamp_Badges {
     
     function create_badges_pdf($post = array()) {
         if ($post && array_key_exists('create_badges_pdf', $post) ) {
-                        
-            $users = get_users();
+            $args = array();
+            if ($includeUsers = explode(',', $post['include_users'])) {
+                $args['include'] = $includeUsers;
+            }
+            $users = get_users($args);
             $options = isset($post['options']) ? $post['options'] : array();
                     
             if ($users) {
