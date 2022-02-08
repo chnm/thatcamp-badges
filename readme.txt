@@ -1,3 +1,7 @@
+NOTE
+RRCHNM archived this repository in February 2022. Last actual code activity was 2011. If you need more information or to unarchive this repository, please contact us at  webmaster@chnm.gmu.edu
+
+
 === THATCamp Badges ===
 Contributors: jeremyboggs
 Donate link: http://chnm.gmu.edu
